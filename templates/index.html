@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulyator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #6dd5fa, #ff758c);
+            overflow: hidden;
+        }
+
+        .calculator {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            width: 320px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        h1 {
+            font-size: 26px;
+            margin-bottom: 25px;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            margin: 5px 0;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            background: #f9f9f9;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            box-sizing: border-box;
+        }
+
+        input[type="number"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #1e90ff;
+            box-shadow: 0 0 8px rgba(30, 144, 255, 0.3);
+            background: #fff;
+        }
+
+        select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="gray" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 10px top 50%;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(90deg, #1e90ff, #00b4db);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background: linear-gradient(90deg, #00b4db, #1e90ff);
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .result {
+            margin-top: 25px;
+            font-size: 18px;
+            color: #2c3e50;
+            background: #f1f3f5;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        .error {
+            color: #ff4d4f;
+            font-size: 14px;
+            margin-top: 10px;
+            background: #fff1f1;
+            padding: 8px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h1>Kalkulyator</h1>
+        <form action="{{ url_for('index') }}" method="post">
+            <div class="input-group">
+                <input type="number" name="num1" placeholder="Birinchi raqam" required>
+            </div>
+
+            <div class="input-group">
+                <select name="operation" required>
+                    <option value="" disabled selected>Operatsiyani tanlang</option>
+                    <option value="add">+</option>
+                    <option value="subtraction">-</option>
+                    <option value="multiply">×</option>
+                    <option value="divide">÷</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <input type="number" name="num2" placeholder="Ikkinchi raqam" required>
+            </div>
+            
+            <button type="submit">Hisoblash</button>
+        </form>
+        <div class="result" id="result"> Natija: {{ result }} </div>
+    </div>
+</body>
+</html>
